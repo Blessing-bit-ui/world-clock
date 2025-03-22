@@ -15,3 +15,23 @@ function updateCurrentDate() {
 }
 updateCurrentDate();
 setInterval(updateCurrentDate, 1000);
+
+ function updateCities(event) {
+   let city = event.target.value;
+   if (city == "current") {
+     city = moment.tz.guess();
+   }
+   let currentUpdate = document.querySelector("#details");
+   let timeElement = moment.tz(city).format("h:mm:ss");
+   let dateElement = moment.tz(city).format("LL");
+
+   currentUpdate.innerHTML = `<div class="details">
+        <div class="cityNameDate">
+        <div class="city-name">${city.replace("_", " -").split("/")[1]}</div>
+        <div class="city-date">${city}</div>
+        </div>
+        <div class="city-time"id=>${timeElement}</div> 
+       </div>`;
+ }
+ let selectCitiesElement = document.querySelector("#selectedCities");
+ selectedCities.addEventListener("change", updateCities);
